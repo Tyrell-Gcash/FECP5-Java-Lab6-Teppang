@@ -5,23 +5,17 @@ import java.util.*;
 public class Main {
 
     public static void addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, String pizzaType, int quantity){
-
         pizzas.add(pizzaType);
         quantities.add(quantity);
-
     }
 
     public static void updateOrder(ArrayList<Integer> quantities, int index, int newQuantity){
-
         quantities.set(index, newQuantity);
-
     }
 
     public static void removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index){
-
         pizzas.remove(index);
         quantities.remove(index);
-
     }
 
     public static void printOrders (ArrayList<String> pizzas, ArrayList<Integer> quantities){
@@ -76,9 +70,9 @@ public class Main {
                 case 2:
 
                     System.out.printf("\n" + "Order number to update: ");
-                    int orderNumber = scanner.nextInt();
+                    int updateOrderNumber = scanner.nextInt();
 
-                    if (orderNumber < 0 || orderNumber > pizzas.size() || pizzas.get(orderNumber) == null){
+                    if (updateOrderNumber - 1 < 0 || updateOrderNumber - 1 >= pizzas.size() || pizzas.get(updateOrderNumber - 1) == null){
                         System.out.println("Order number does not exist or is wrong!");
                         break;
                     }
@@ -87,19 +81,30 @@ public class Main {
 
 
                         System.out.printf("Quantity: ");
-                        int pizzaQuantity = scanner.nextInt();
+                        int newPizzaQuantity = scanner.nextInt();
 
-                        if (pizzaQuantity <= 0){
+                        if (newPizzaQuantity <= 0){
                             System.out.println("Quantity must be positive");
                             continue;
                         }
 
-                        updateOrder(quantities, (orderNumber - 1), pizzaQuantity);
+                        updateOrder(quantities, (updateOrderNumber - 1), newPizzaQuantity);
                         break;
 
                     }
+
+                    break;
                 case 3:
 
+                    System.out.printf("\n" + "Order number to remove: ");
+                    int removeOrderNumber = scanner.nextInt();
+
+                    if (removeOrderNumber - 1 < 0 || removeOrderNumber - 1 >= pizzas.size() || pizzas.get(removeOrderNumber - 1) == null){
+                        System.out.println("Order number does not exist or is wrong!");
+                        break;
+                    }
+
+                    removeOrder(pizzas, quantities, removeOrderNumber - 1);
                     break;
 
                 case 4:
