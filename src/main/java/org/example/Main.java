@@ -5,15 +5,28 @@ import java.util.*;
 public class Main {
 
     public static void addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, String pizzaType, int quantity){
+        if(quantity <= 0){
+            return;
+        }
+
         pizzas.add(pizzaType);
         quantities.add(quantity);
     }
 
     public static void updateOrder(ArrayList<Integer> quantities, int index, int newQuantity){
+        if (index < 0 || index >= quantities.size() || quantities.get(index) == null){
+           return;
+        }
+        if(newQuantity <= 0){
+            return;
+        }
         quantities.set(index, newQuantity);
     }
 
     public static void removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index){
+        if (index < 0 || index >= pizzas.size() || pizzas.get(index) == null){
+            return;
+        }
         pizzas.remove(index);
         quantities.remove(index);
     }
@@ -58,17 +71,17 @@ public class Main {
 
                         if (pizzaQuantity <= 0){
                             System.out.println("Quantity must be positive");
+                            System.out.println(pizzas.isEmpty());
+                            System.out.println(pizzas.size());
                             continue;
                         }
 
                         addOrder(pizzas, quantities, pizzaType, pizzaQuantity);
                         break;
-
                     }
 
                     break;
                 case 2:
-
                     System.out.printf("\n" + "Order number to update: ");
                     int updateOrderNumber = scanner.nextInt();
 
@@ -78,8 +91,6 @@ public class Main {
                     }
 
                     while(true){
-
-
                         System.out.printf("Quantity: ");
                         int newPizzaQuantity = scanner.nextInt();
 
@@ -90,12 +101,10 @@ public class Main {
 
                         updateOrder(quantities, (updateOrderNumber - 1), newPizzaQuantity);
                         break;
-
                     }
 
                     break;
                 case 3:
-
                     System.out.printf("\n" + "Order number to remove: ");
                     int removeOrderNumber = scanner.nextInt();
 
@@ -106,9 +115,7 @@ public class Main {
 
                     removeOrder(pizzas, quantities, removeOrderNumber - 1);
                     break;
-
                 case 4:
-
                     printOrders(pizzas, quantities);
 
                     break;
